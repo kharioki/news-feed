@@ -1,4 +1,4 @@
-import { StyleSheet, TouchableOpacity, Text, View, Image } from 'react-native'
+import { StyleSheet, TouchableOpacity, View, Image } from 'react-native'
 
 import { colors } from '../../config/theme'
 import StyledText from '../texts/StyledText'
@@ -16,15 +16,13 @@ const NewsItem = ({ image, title, avatar, author, date, ...props }) => {
     >
       <Image source={image} style={styles.image} />
       <View style={styles.bottomSection}>
-        <StyledText bold style={[{ color: activeColors.accent }, styles.title]}>
+        <StyledText numberOfLines={3} bold style={[{ color: activeColors.accent }, styles.title]}>
           {title}
         </StyledText>
         <View style={styles.row}>
           <View style={styles.authorRow}>
             <Image source={avatar} style={styles.avatar} />
-            <StyledText small style={{ color: activeColors.tint }}>
-              {author}
-            </StyledText>
+            <StyledText numberOfLines={1} bold>{author}</StyledText>
           </View>
           <StyledText small style={[{ color: activeColors.tertiary }, styles.date]}>
             {date}
