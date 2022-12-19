@@ -1,8 +1,9 @@
-import Home from './screens/Home';
-import Details from './screens/Details';
+import 'react-native-gesture-handler';
+
+import RootStack from './navigators/RootStack';
 
 export default function App() {
   return (
-    <Details />
+    <RootStack />
   );
 }

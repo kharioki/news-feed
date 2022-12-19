@@ -1,13 +1,20 @@
 import { StyleSheet, TouchableOpacity, View, Image } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 
 import { colors } from '../../config/theme'
 import StyledText from '../texts/StyledText'
 
-const NewsItem = ({ image, title, avatar, author, date, ...props }) => {
+const NewsItem = ({ image, title, avatar, author, date, content, ...props }) => {
   let activeColors = colors
+  const navigation = useNavigation()
 
   return (
     <TouchableOpacity
+      onPress={() => {
+        navigation.navigate('Details', {
+          image, title, avatar, author, date, content
+        })
+      }}
       style={[
         { backgroundColor: activeColors.secondary },
         styles.container

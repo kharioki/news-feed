@@ -5,11 +5,10 @@ import MainContainer from '../components/containers/MainContainer';
 import StyledText from '../components/texts/StyledText';
 
 // data
-import { newsData } from '../config/data';
 import { colors } from '../config/theme';
 
-const Details = () => {
-  const { image, title, avatar, author, date, content } = newsData[0];
+const Details = ({ route }) => {
+  const { image, title, avatar, author, date, content } = route?.params;
   let activeColors = colors;
 
   return (
