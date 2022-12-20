@@ -1,5 +1,7 @@
 import { StyleSheet, View, Image } from 'react-native'
+import { useContext } from 'react'
 
+import { ThemeContext } from '../contexts/ThemeContext'
 // components
 import MainContainer from '../components/containers/MainContainer';
 import StyledText from '../components/texts/StyledText';
@@ -9,7 +11,9 @@ import { colors } from '../config/theme';
 
 const Details = ({ route }) => {
   const { image, title, avatar, author, date, content } = route?.params;
-  let activeColors = colors;
+
+  const { theme } = useContext(ThemeContext);
+  let activeColors = colors[theme.mode]
 
   return (
     <MainContainer style={{ backgroundColor: activeColors.secondary }}>

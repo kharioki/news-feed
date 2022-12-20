@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { StyleSheet, View, Switch } from 'react-native'
+import { useContext } from 'react'
 
 // components
 import MainContainer from '../components/containers/MainContainer';
@@ -8,14 +9,18 @@ import SettingsItem from '../components/sections/SettingsItem';
 import SettingsButton from '../components/sections/SettingsButton';
 
 // data
-import { newsData } from '../config/data';
 import { colors } from '../config/theme';
+import { ThemeContext } from '../contexts/ThemeContext'
 
 const Settings = () => {
-  let activeColors = colors;
+  const { theme, updateTheme } = useContext(ThemeContext)
+  let activeColors = colors[theme.mode];
 
-  const [isActive, setIsActive] = useState(false);
-  const toggleSwitch = () => setIsActive(previousState => !previousState);
+  const [isActive, setIsActive] = useState(theme.mode === 'dark');
+  const toggleSwitch = () => {
+    updateTheme();
+    setIsActive(previousState => !previousState)
+  };
 
   return (
     <MainContainer style={styles.container}>
@@ -53,9 +58,24 @@ const Settings = () => {
       </StyledText>
 
       <View style={styles.section}>
-        <SettingsButton label="Light" icon="lightbulb-on" isActive={true} />
-        <SettingsButton label="Dark" icon="weather-night" isActive={false} />
-        <SettingsButton label="System" icon="theme-light-dark" isActive={false} />
+        <SettingsButton
+          label="Light"
+          icon="lightbulb-on"
+          isActive={theme.mode === 'light' && !theme.system}
+          onPress={() => updateTheme({ mode: 'light' })}
+        />
+        <SettingsButton
+          label="Dark"
+          icon="weather-night"
+          isActive={theme.mode === 'dark' && !theme.system}
+          onPress={() => updateTheme({ mode: 'dark' })}
+        />
+        <SettingsButton
+          label="System"
+          icon="theme-light-dark"
+          isActive={theme.system}
+          onPress={() => updateTheme({ system: true })}
+        />
       </View>
     </MainContainer>
   )

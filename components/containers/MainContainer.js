@@ -1,10 +1,14 @@
 import { StatusBar } from 'expo-status-bar'
 import { StyleSheet, SafeAreaView, ScrollView } from 'react-native'
+import { useContext } from 'react'
 
+import { ThemeContext } from '../../contexts/ThemeContext'
 import { colors } from '../../config/theme'
 
 const MainContainer = ({ children, style, ...props }) => {
-  let activeColors = colors
+  const { theme } = useContext(ThemeContext)
+  let activeColors = colors[theme.mode]
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView
@@ -13,7 +17,7 @@ const MainContainer = ({ children, style, ...props }) => {
         {...props}
       >
         {children}
-        <StatusBar style="auto" />
+        <StatusBar style={theme.mode === 'dark' ? 'light' : 'dark'} />
       </ScrollView>
     </SafeAreaView>
   )

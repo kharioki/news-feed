@@ -1,7 +1,9 @@
 import { NavigationContainer } from "@react-navigation/native"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { MaterialCommunityIcons } from "@expo/vector-icons"
+import { useContext } from 'react'
 
+import { ThemeContext } from '../contexts/ThemeContext'
 // stacks
 import HomeStackScreen from './HomeStack'
 
@@ -12,7 +14,8 @@ import { colors } from "../config/theme";
 const Tab = createBottomTabNavigator()
 
 const RootStack = () => {
-  let activeColors = colors
+  const { theme } = useContext(ThemeContext)
+  let activeColors = colors[theme.mode]
 
   return (
     <NavigationContainer>

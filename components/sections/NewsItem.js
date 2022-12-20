@@ -1,12 +1,16 @@
 import { StyleSheet, TouchableOpacity, View, Image } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
+import { useContext } from 'react'
 
+import { ThemeContext } from '../../contexts/ThemeContext'
 import { colors } from '../../config/theme'
 import StyledText from '../texts/StyledText'
 
 const NewsItem = ({ image, title, avatar, author, date, content, ...props }) => {
-  let activeColors = colors
   const navigation = useNavigation()
+
+  const { theme } = useContext(ThemeContext)
+  let activeColors = colors[theme.mode]
 
   return (
     <TouchableOpacity
